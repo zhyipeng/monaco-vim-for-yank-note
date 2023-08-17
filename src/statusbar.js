@@ -2,6 +2,7 @@ export default class VimStatusBar {
   constructor(node, editor, sanitizer = null) {
     this.node = node;
     this.modeInfoNode = document.createElement("span");
+    this.modeInfoNode.style.fontStyle = 'italic'
     this.secInfoNode = document.createElement("span");
     this.notifNode = document.createElement("span");
     this.notifNode.className = "vim-notification";
@@ -19,16 +20,20 @@ export default class VimStatusBar {
   setMode(ev) {
     if (ev.mode === "visual") {
       if (ev.subMode === "linewise") {
-        this.setText("--VISUAL LINE--");
+        this.setText("V/vl ")
+        // this.setText("--VISUAL LINE--");
       } else if (ev.subMode === "blockwise") {
-        this.setText("--VISUAL BLOCK--");
+        this.setText("V/vb ")
+        // this.setText("--VISUAL BLOCK--");
       } else {
-        this.setText("--VISUAL--");
+        this.setText("V/v ")
+        // this.setText("--VISUAL--");
       }
       return;
     }
 
-    this.setText(`--${ev.mode.toUpperCase()}--`);
+    // this.setText(`--${ev.mode.toUpperCase()}--`);
+    this.setText(`V/${ev.mode[0].toLowerCase()} `);
   }
 
   setKeyBuffer(key) {
